@@ -1,0 +1,8 @@
+<div class="container">
+    <form class="form-inline m-4" action="/update/<%= todo.id %>?_method=PUT" method="post">
+        <div class="form-group mx-sm-3 mb-2">
+          <input type="text" class="form-control" name="todo" id="todo" value="<%= todo.todo %> " placeholder="Todo">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Save</button>
+    </form>
+</div>

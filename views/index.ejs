@@ -1,22 +1,21 @@
 <div class="container">
     <form class="d-flex m-3" action="/search" method="get" >
-        <input class="form-control me-2" name="search" id="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control" name="search" id="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
     <form class="form-inline" method="post" action="/">
         <div class="form-group mx-sm-3 mb-2">
-          <label for="inputPassword2" class="sr-only">Password</label>
           <input type="text" class="form-control" name="todo" id="todo" placeholder="Todo">
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Add</button>
+        <button type="submit" class="btn btn-primary mb-2"><i class="fa-solid fa-plus"></i></button>
     </form>
     <% todos.forEach((todo)=>{ %>
         <ul>
             <li><%= todo.todo %>
                 <div> 
                     <form action="/delete/<%= todo.id %>?_method=DELETE" method="post">
-                        <a href="/" class="btn btn-secondary">Edit</a>
-                        <button type="submit" class="btn btn-danger m-2">Delete</button>
+                        <a href="/update/<%= todo.id %> " class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <button type="submit" class="btn btn-danger m-2"><i class="fa-solid fa-trash-can"></i></button>
                     </form>
                 </div>
             </li>

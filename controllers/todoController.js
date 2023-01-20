@@ -1,23 +1,22 @@
+const { default: mongoose } = require('mongoose');
 const Todos = require('../models/todo.model')
 
 
 //Get Homepage
 exports.index = async (req,res) => {
-    const todos = await Todos.find()
+    const todos = await Todos.find();
     res.render('index',{
-        title: "Homepage",
+        title: "Home",
         todos: todos
     })
 };
 
 //Add new todo
 exports.insert = async (req,res) => {
-    let todo = new Todos({
-        todo: req.body.todo
-    });
 
     try {
-        todo = await todo.save();
+        req.body.user = req.user.id;
+        await Todos.create(req.body)
         res.redirect('/');
         
     } catch (error) {
@@ -25,13 +24,22 @@ exports.insert = async (req,res) => {
     }
 };
 
+//Get Edit page
+exports.getEditPage = async (req,res) => {
+    const todo = await Todos.findById(req.params.id)
+    res.render('edit',{
+        title: 'Edit',
+        todo: todo
+    });
+}
+
 
 //Edit todo
 exports.update = async (req,res) => {
    let todo
    try {
         todo = await Todos.findById(req.params.id)
-        todo.todo = req.body.title
+        todo.todo = req.body.todo
         await todo.save();
 
         res.redirect('/');

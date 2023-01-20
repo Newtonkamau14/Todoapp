@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
-mongoose.connect("mongodb://localhost:27017/Foodcircles",{
+
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.MONGO_URI,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 },(err) => {
