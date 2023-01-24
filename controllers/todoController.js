@@ -4,10 +4,13 @@ const Todos = require('../models/todo.model')
 
 //Get Homepage
 exports.index = async (req,res) => {
-    const todos = await Todos.find();
+    let user = req.body.user
+    const todos = await Todos.find({ user:req.user.id });
+    req.flash('info','Welcome')
     res.render('index',{
         title: "Home",
-        todos: todos
+        todos: todos,
+        message: req.flash('message')
     })
 };
 
@@ -17,6 +20,7 @@ exports.insert = async (req,res) => {
     try {
         req.body.user = req.user.id;
         await Todos.create(req.body)
+        req.flash('message','Todo item added')
         res.redirect('/');
         
     } catch (error) {
@@ -41,9 +45,9 @@ exports.update = async (req,res) => {
         todo = await Todos.findById(req.params.id)
         todo.todo = req.body.todo
         await todo.save();
-
         res.redirect('/');
-   } catch (error) {
+
+    } catch (error) {
         if(book == null){
             res.redirect('/')
         }
@@ -53,7 +57,7 @@ exports.update = async (req,res) => {
                 book: book
             })
         }
-   }
+    }
 
 };
 

@@ -1,4 +1,10 @@
 <div class="container">
+    <% if(message.length > 0) {%>
+        <div class="m-3 alert alert-success">
+            <%= message  %>    
+        </div>
+
+    <% } %>     
     <form class="d-flex m-3" action="/search" method="get" >
         <input class="form-control" name="search" id="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
