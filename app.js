@@ -8,7 +8,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const expressLayouts = require('express-ejs-layouts')
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3000
 require('./config/passport.config')
 require('./config/database')
 
@@ -25,11 +25,12 @@ app.use(session({
     secret: 'secret',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI, collectionName: 'sessions'}),
+    store: MongoStore.create({ mongoUrl: process.env.MONGOATLAS_URI, collectionName: 'sessions'}),
     cookie: { 
         maxAge: 1000 * 60 * 60 *  24
     }
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

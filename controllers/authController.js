@@ -23,6 +23,7 @@ exports.createUser = async (req,res) => {
     });    
     try {
         user = await user.save();
+        req.flash('info','New Account Created')
         res.redirect('/auth/login'); 
     } 
     catch  {

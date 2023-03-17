@@ -4,14 +4,21 @@ const Todos = require('../models/todo.model')
 
 //Get Homepage
 exports.index = async (req,res) => {
-    let user = req.body.user
-    const todos = await Todos.find({ user:req.user.id });
-    req.flash('info','Welcome')
-    res.render('index',{
-        title: "Home",
-        todos: todos,
-        message: req.flash('message')
-    })
+
+    try {
+        let user = req.body.user
+        const todos = await Todos.find({ user:req.user.id });
+        req.flash('info','Welcome')
+        res.render('index',{
+            title: "Home",
+            todos: todos,
+            message: req.flash('message')
+        });
+    } 
+    catch (error) {
+        console.log(error)
+    }
+    
 };
 
 //Add new todo
